@@ -15,6 +15,8 @@ import (
 	"github.com/btcsuite/btcutil"
 )
 
+var ChainCfg = &chaincfg.MainNetParams;
+
 // *****************************
 // Transaction Listing Functions
 // *****************************
@@ -771,7 +773,7 @@ func (r FutureAddMultisigAddressResult) Receive() (btcutil.Address, error) {
 		return nil, err
 	}
 
-	return btcutil.DecodeAddress(addr, &chaincfg.MainNetParams)
+	return btcutil.DecodeAddress(addr, ChainCfg)
 }
 
 // AddMultisigAddressAsync returns an instance of a type that can be used to get
@@ -885,7 +887,7 @@ func (r FutureGetNewAddressResult) Receive() (btcutil.Address, error) {
 		return nil, err
 	}
 
-	return btcutil.DecodeAddress(addr, &chaincfg.MainNetParams)
+	return btcutil.DecodeAddress(addr, ChainCfg)
 }
 
 // GetNewAddressAsync returns an instance of a type that can be used to get the
@@ -923,7 +925,7 @@ func (r FutureGetRawChangeAddressResult) Receive() (btcutil.Address, error) {
 		return nil, err
 	}
 
-	return btcutil.DecodeAddress(addr, &chaincfg.MainNetParams)
+	return btcutil.DecodeAddress(addr, ChainCfg)
 }
 
 // GetRawChangeAddressAsync returns an instance of a type that can be used to
@@ -962,7 +964,7 @@ func (r FutureAddWitnessAddressResult) Receive() (btcutil.Address, error) {
 		return nil, err
 	}
 
-	return btcutil.DecodeAddress(addr, &chaincfg.MainNetParams)
+	return btcutil.DecodeAddress(addr, ChainCfg)
 }
 
 // AddWitnessAddressAsync returns an instance of a type that can be used to get
@@ -1000,7 +1002,7 @@ func (r FutureGetAccountAddressResult) Receive() (btcutil.Address, error) {
 		return nil, err
 	}
 
-	return btcutil.DecodeAddress(addr, &chaincfg.MainNetParams)
+	return btcutil.DecodeAddress(addr, ChainCfg)
 }
 
 // GetAccountAddressAsync returns an instance of a type that can be used to get
@@ -1105,8 +1107,7 @@ func (r FutureGetAddressesByAccountResult) Receive() ([]btcutil.Address, error) 
 
 	addrs := make([]btcutil.Address, 0, len(addrStrings))
 	for _, addrStr := range addrStrings {
-		addr, err := btcutil.DecodeAddress(addrStr,
-			&chaincfg.MainNetParams)
+		addr, err := btcutil.DecodeAddress(addrStr, ChainCfg)
 		if err != nil {
 			return nil, err
 		}
